@@ -76,6 +76,8 @@ Hetzelfde formaat als de import in de app (`moto-service-schema`, versie 1); zie
 - Gebruik waar het kan de `code` uit het standaardschema van de app (`olie`, `klepspeling`, `remvloeistof`, …), zodat het bij het juiste bestaande onderdeel terechtkomt.
 - Elk onderdeel krijgt een `bron` met paginanummer.
 - Kilometer- én tijdsinterval ("wat het eerst komt"): vul beide in. Noemt de handleiding er een niet, dan `null`. Niets verzinnen.
+- Noemt de handleiding naast vervangen ook een **controle** (bijvoorbeeld bougies: controleren elke 6.000 km, vervangen elke 12.000 km), zet dan `controleKm` en/of `controleMaanden` bij hetzelfde onderdeel. Zelfde regels als `intervalKm` en `intervalMaanden`; beide mogen ontbreken.
+- Optioneel: `veiligheidskritisch` (`true` of `false`) en, bij geschatte schema's, `zekerheid` (`"zeker"` of `"waarschijnlijk"`). Bij een schema uit een handleiding laat je `zekerheid` weg.
 
 ## Controle
 

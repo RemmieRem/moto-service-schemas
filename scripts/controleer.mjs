@@ -50,6 +50,13 @@ export function controleerSchema(data, waar) {
     if (km) fout(w, km);
     if (mnd) fout(w, mnd);
     if (!km && !mnd && o.intervalKm == null && o.intervalMaanden == null) fout(w, 'geen interval (intervalKm en/of intervalMaanden)');
+    // Optioneel controle-interval naast het vervanginterval (app #108): zelfde regels, beide mogen ontbreken.
+    for (const [veld, max] of [['controleKm', MAX_KM], ['controleMaanden', MAX_MAANDEN]]) {
+      const f = intervalFout(o[veld], max, veld);
+      if (f) fout(w, f);
+    }
+    if (o.zekerheid != null && !['zeker', 'waarschijnlijk'].includes(o.zekerheid)) fout(w, '"zekerheid" moet "zeker" of "waarschijnlijk" zijn');
+    if (o.veiligheidskritisch != null && typeof o.veiligheidskritisch !== 'boolean') fout(w, '"veiligheidskritisch" moet true of false zijn');
     if (o.code != null && (typeof o.code !== 'string' || !o.code.trim())) fout(w, '"code" moet tekst zijn');
     for (const veld of ['actie', 'toelichting', 'bron']) {
       if (o[veld] != null && typeof o[veld] !== 'string') fout(w, `"${veld}" moet tekst zijn`);
